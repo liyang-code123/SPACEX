@@ -1,3 +1,7 @@
+# Getting to know this Project
+SPACEX is a React JS-based starlink trajectory visualization dashboard and it tracks satellites in real-time based on geo-locations. 
+The project demo can be found via: https://youtu.be/7xDdc_0GSbk
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

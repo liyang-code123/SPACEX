@@ -16,7 +16,7 @@ class SatSettingForm extends Component {
             },
         };
         return (
-            <Form {...formItemLayout} onSubmit={this.showSatellite}>
+            <Form {...formItemLayout} className="sat-setting" onSubmit={this.showSatellite}>
                 <Form.Item label="Longitude(degrees)">
                     {
                         getFieldDecorator("longitude", {
@@ -26,6 +26,7 @@ class SatSettingForm extends Component {
                                     message: "Please input your Longitude",
                                 }
                             ],
+                            initialValue: 70
                         })(<InputNumber min={-180} max={180}
                                         style={{width: "100%"}}
                                         placeholder="Please input Longitude"
@@ -42,6 +43,7 @@ class SatSettingForm extends Component {
                                     message: "Please input your Latitude",
                                 }
                             ],
+                            initialValue: -40
                         })(<InputNumber placeholder="Please input Latitude"
                                         min={-90} max={90}
                                         style={{width: "100%"}}
@@ -58,6 +60,7 @@ class SatSettingForm extends Component {
                                     message: "Please input your Elevation",
                                 }
                             ],
+                            initialValue: 100
                         })(<InputNumber placeholder="Please input Elevation"
                                         min={-413} max={8850}
                                         style={{width: "100%"}}
@@ -74,6 +77,7 @@ class SatSettingForm extends Component {
                                     message: "Please input your Altitude",
                                 }
                             ],
+                            initialValue: 90
                         })(<InputNumber placeholder="Please input Altitude"
                                         min={0} max={90}
                                         style={{width: "100%"}}
@@ -90,6 +94,7 @@ class SatSettingForm extends Component {
                                     message: "Please input your Duration",
                                 }
                             ],
+                            initialValue: 10
                         })(<InputNumber placeholder="Please input Duration" min={0} max={90} style={{width: "100%"}} />)
                     }
                 </Form.Item>
@@ -102,9 +107,15 @@ class SatSettingForm extends Component {
         );
     }
 
+    // prevent page to be directed to a new page.
     showSatellite = e => {
         e.preventDefault();
-        console.log('click')
+        this.props.form.validateFieldsAndScroll((err, values) => {
+            if(!err) {
+                // console.log('Received values of form: ', values);
+                this.props.onShow(values);
+            }
+        })
     }
 }
 

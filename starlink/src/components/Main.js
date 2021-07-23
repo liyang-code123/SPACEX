@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
-import { Row, Col , Spin} from 'antd';
+import { Row, Col , Spin } from 'antd';
 import axios from "axios";
 
 import SatSetting from "./SatSetting";
 import SatelliteList from "./SatelliteList";
+import WorldMap from "./WorldMap";
 
 import { SAT_API_KEY, STARLINK_CATEGORY, NEARBY_SATELLITE} from "../constants";
 
@@ -23,17 +24,18 @@ class Main extends Component {
                     <SatSetting onShow={this.showNearbySatellite}/>
                     <SatelliteList satInfo={satInfo}
                                    isLoad={isLoadingList}
-                    />
-
+                                   onShowMap={this.showMap}/>
                 </Col>
-                <Col span={16}
-                     className="right-side">
-                     right
+                <Col span={16} className="right-side">
+                    <WorldMap />
                 </Col>
             </Row>
         );
     }
 
+    showMap = list => {
+        console.log(list);
+    }
     showNearbySatellite = setting => {
         console.log(setting);
         this.setState({settings: setting})

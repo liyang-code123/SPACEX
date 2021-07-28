@@ -10,13 +10,14 @@ import { SAT_API_KEY, STARLINK_CATEGORY, NEARBY_SATELLITE} from "../constants";
 
 class Main extends Component {
     state = {
-        settings: null,
+        setting: null,
         satInfo: null,
+        satList: null,
         isLoadingList: false
     }
 
     render() {
-        const { isLoadingList, satInfo } = this.state;
+        const { isLoadingList, satInfo , satList, setting} = this.state;
         return (
             <Row className="main">
                 <Col span={8}
@@ -27,18 +28,23 @@ class Main extends Component {
                                    onShowMap={this.showMap}/>
                 </Col>
                 <Col span={16} className="right-side">
-                    <WorldMap />
+                    <WorldMap satData={satList} observerData={setting}/>
                 </Col>
             </Row>
         );
     }
 
-    showMap = list => {
-        console.log(list);
+    showMap = selected => {
+        console.log(selected);
+        // setState will re-render
+        this.setState(preState => ({
+            ...preState,
+            satList: [...selected]
+        }))
     }
     showNearbySatellite = setting => {
         console.log(setting);
-        this.setState({settings: setting})
+        this.setState({setting: setting})
         this.fetchSatellite(setting);
     }
 
